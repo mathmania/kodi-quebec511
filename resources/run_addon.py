@@ -24,7 +24,9 @@ def run(argv):
  
     if argv[2] != '':
         print("#########################################################################################")
-        camList = directoryUtils.createCameraList()
+        print(argv[2])
+        regionId = int(argv[2].split("=")[1])
+        camList = directoryUtils.createCameraList(regionId)
         xbmcplugin.addDirectoryItems(addonId, camList)
     else:
         regionList = directoryUtils.createRegionList()

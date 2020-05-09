@@ -19,17 +19,22 @@ def createRegionList():
 
     return directoryItems
 
-def createCameraList():
+def createCameraList(regionId):
     directoryItems = []
-    listItem = xbmcgui.ListItem(label="test")
-    video_info = {
-        'codec': 'h264',
-        'aspect': 1.78,
-        'width': 1280,
-        'height': 720,
-    }
-    listItem.addStreamInfo('video', video_info)
-    directoryItems.append(("https://www.quebec511.info/Carte/Fenetres/camera.ashx?id=3602&format=mp4", listItem, False))
+    for element in cameraList.cameraDict:
+        if(element['regionId'] == regionId):
+            listItem = xbmcgui.ListItem(label=element['name'])
+            video_info = {
+                'codec': 'h264',
+                'aspect': 1.78,
+                'width': 1280,
+                'height': 720,
+            }
+            listItem.addStreamInfo('video', video_info)
+            cameraUrl = 'https://www.quebec511.info/Carte/Fenetres/camera.ashx?id={id}&format=mp4'.format(
+                id = str(element['id']))
+            directoryItems.append((cameraUrl, listItem, False))
+
     return directoryItems
 
 def buildUrl(params=None):
